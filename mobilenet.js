@@ -6,20 +6,15 @@ let Helpers = require("./Helpers");
 let answerSet = [];
 
 async function run(filenames) {
-
-    let json_labels = fs.readFileSync("imagenet_class_index.json");
-    let labels = JSON.parse(json_labels);
-
+    let labels = JSON.parse(fs.readFileSync("imagenet_class_index.json"));
     let redis = new Redis({parser: 'javascript'});
-
     const model_filename = './models/mobilenet_v2_1.4_224_frozen.pb';
     const input_var = 'input';
     const output_var = 'MobilenetV2/Predictions/Reshape_1';
-
-    const buffer = fs.readFileSync(model_filename, {'flag': 'r'});
+    const modelBuffer = fs.readFileSync(model_filename, {'flag': 'r'});
 
     console.log("Setting model");
-    redis.call('AI.MODELSET', 'mobilenet', 'TF', 'CPU', 'INPUTS', input_var, 'OUTPUTS', output_var, buffer);
+    redis.call('AI.MODELSET', 'mobilenet', 'TF', 'CPU', 'INPUTS', input_var, 'OUTPUTS', output_var, modelBuffer);
 
     const image_height = 224;
     const image_width = 224;
@@ -59,7 +54,6 @@ async function run(filenames) {
             console.table(answerSet, ['filename', 'matches']);
         }
     }
-
 }
 
 let filenames = Array.from(process.argv);
