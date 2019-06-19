@@ -1,2 +1,3 @@
-panda:
-   node mobilenet.js ./img/panda.jpg
+# identify image
+image img="":
+   node mobilenet.js {{img}}
