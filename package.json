@@ -1,0 +1,13 @@
+{
+  "name": "redis_mobilenet",
+  "version": "0.2.0",
+  "author": "JoeCianflone",
+  "description": "RedisAI Demo",
+  "dependencies": {
+    "ioredis": "^4.0.2",
+    "jimp": "^0.5.6"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
