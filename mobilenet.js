@@ -26,9 +26,9 @@ async function run(filenames) {
     let p = 0;
 
     for (let i in filenames) {
-
+        let filename = filenames[i];
         console.log("Reading image");
-        let input_image = await Jimp.read(filenames[i]);
+        let input_image = await Jimp.read(filename);
 
         let image = input_image.cover(image_width, image_height);
         let normalized = Helpers.normalizeRGB(image.bitmap.data, image.hasAlpha());
@@ -50,14 +50,13 @@ async function run(filenames) {
         let label = Helpers.argmax(out_array);
 
         answerSet.push({
-            'filename': filenames[i],
+            'filename': filename,
             'matches': labels[label - 1][1]
         });
         p++;
         if (p === filenames.length) {
             console.log("\n...OK I think I got something...\n");
             console.table(answerSet, ['filename', 'matches']);
-
         }
     }
 
