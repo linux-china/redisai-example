@@ -1,6 +1,6 @@
 class Helpers {
 
-    argmax(arr) {
+    static argmax(arr) {
         let index = 0;
         let value = arr[0];
         arr.forEach((item, key) => {
@@ -12,7 +12,7 @@ class Helpers {
         return index;
     }
 
-    normalizeRGB(buffer) {
+    static normalizeRGB(buffer) {
         let npixels = buffer.length / 4;
         let out = new Float32Array(npixels * 3);
         for (let i = 0; i < npixels; i++) {
@@ -23,7 +23,7 @@ class Helpers {
         return out;
     }
 
-    bufferToFloat32Array(buffer) {
+    static bufferToFloat32Array(buffer) {
         let out_array = new Float32Array(buffer.length / 4);
         for (let i = 0; i < out_array.length; i++) {
             out_array[i] = buffer.readFloatLE(4 * i);
